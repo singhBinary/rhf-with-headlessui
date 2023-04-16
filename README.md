@@ -7,6 +7,8 @@ Components covered -
 - [Combobox (Autocomplete)](https://headlessui.com/react/combobox)
 - [Radio Group](https://headlessui.com/react/radio-group)
 
+Refer the following [blogpost](https://dev.to/binarysingh/how-to-use-headlessui-with-react-hook-form-5dhe) for more details
+
 ## Good to know
 
 The headless ui components like combobox and radio group use an array of options and each option in this array is an object. By default, headless ui sends you the complete information of selected option i.e the complete object of the selected option. But, it is very rare that you'll need this. So, I have modified the components to return only the value of the selected option instead of complete object. If you want to stick to the default behaviou you can use the default components i.e, ComboBoxDefault and RadioGroupDefault.
@@ -17,7 +19,7 @@ I also noticed a class "select-none" added to <Combobox.Option /> which caused i
 
 ## Demo
 
-A working demo for the same can be found at []()
+A working demo for the same can be found at [https://rhf-with-headlessui.vercel.app](https://rhf-with-headlessui.vercel.app)
 
 This project is deployed using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
