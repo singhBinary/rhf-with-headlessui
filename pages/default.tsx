@@ -72,7 +72,7 @@ export default function DefaultBehaviour() {
       reset({ storage: undefined, user: undefined });
     }
     setFormData({});
-  }, [storage, user]);
+  }, [storage, user, reset]);
 
   return (
     <main className="min-h-screen sm:px-24 sm:py-10 ">
@@ -82,7 +82,7 @@ export default function DefaultBehaviour() {
         The headless ui components like combobox and radio group use an array of
         options and each option in this array is an object. By default, headless
         ui sends you the complete information of selected option i.e the
-        complete object of the selected option. But, it is very rare that you'll
+        complete object of the selected option. But, it is very rare that you will
         need this. So, I have also created a version of the components to return
         only the value of the selected option instead of complete object. You
         can check it out

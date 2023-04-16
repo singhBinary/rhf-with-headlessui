@@ -41,7 +41,7 @@ export default function Home() {
       reset({ storage: undefined, user: undefined });
     }
     setFormData({});
-  }, [storage, user]);
+  }, [storage, user, reset]);
 
   return (
     <main className="min-h-screen sm:px-24 sm:py-10 ">
@@ -51,7 +51,7 @@ export default function Home() {
         The headless ui components like combobox and radio group use an array of
         options and each option in this array is an object. By default, headless
         ui sends you the complete information of selected option i.e the
-        complete object of the selected option. But, it is very rare that you'll
+        complete object of the selected option. But, it is very rare that you will
         need this. So, I have modified the components to return only the value
         of the selected option instead of complete object. If you want to stick
         to the default behaviou you can use the{" "}
@@ -125,14 +125,14 @@ export default function Home() {
             {storage && user ? (
               <Link
                 href="/"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-3"
+                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 ml-3 border border-gray-300"
               >
                 Without Prefill
               </Link>
             ) : (
               <Link
                 href="?storage=business&user=arlene"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-3"
+                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 ml-3 border border-gray-300"
               >
                 Prefill
               </Link>
