@@ -4,7 +4,7 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { FieldError } from "react-hook-form";
 
 export default function ComboBoxWrapper({
-  value,
+  value = '',
   onChange,
   onBlur,
   label,
@@ -42,7 +42,7 @@ export default function ComboBoxWrapper({
         <Combobox.Label className="block text-sm font-medium leading-6 text-gray-900 mt-6">
           {label}
         </Combobox.Label>
-        <div className="relative mt-1">
+        <div className="relative mt-3">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <Combobox.Button className="w-full inset-y-0 right-0 flex items-center pr-2">
               <Combobox.Input

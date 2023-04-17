@@ -3,8 +3,8 @@ import { useForm, Controller } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import RadioGroupWrapper from "@/components/formElements/RadioGroup";
-import ComboBoxWrapper from "@/components/formElements/ComboBox";
+import RadioGroupDefaultWrapper from "@/components/formElements/RadioGroupDefault";
+import ComboBoxDefaultWrapper from "@/components/formElements/ComboBoxDefault";
 import Header from "@/components/layout/Header";
 import ColContainer from "@/components/layout/ColContainer";
 import ColHeading from "@/components/layout/ColHeading";
@@ -15,7 +15,27 @@ type FormData = {
   user: string;
 };
 
-export default function Home() {
+const comboBoxOptions = [
+  { id: 1, label: "Wade Cooper", value: "wade" },
+  { id: 2, label: "Arlene Mccoy", value: "arlene" },
+];
+
+const radioGroupOptions = [
+  {
+    id: 1,
+    value: "startup",
+    label: "Startup",
+    desc: "12GB",
+  },
+  {
+    id: 2,
+    value: "business",
+    label: "Business",
+    desc: "16GB",
+  },
+];
+
+export default function DefaultBehaviour() {
   const router = useRouter();
   const { storage, user } = router.query;
 
@@ -34,9 +54,20 @@ export default function Home() {
   const storageWatch = watch("storage");
   const userWatch = watch("user");
 
+  const getValCorrespondingOption = (value: string, options: any[]) => {
+    const option = options.find((option) => option.value === value);
+    return option;
+  };
+
   useEffect(() => {
     if (storage && user) {
-      reset({ storage: storage as string, user: user as string });
+      reset({
+        storage: getValCorrespondingOption(
+          storage as string,
+          radioGroupOptions
+        ),
+        user: getValCorrespondingOption(user as string, comboBoxOptions),
+      });
     } else {
       reset({ storage: undefined, user: undefined });
     }
@@ -52,11 +83,12 @@ export default function Home() {
         options and each option in this array is an object. By default, headless
         ui sends you the complete information of selected option i.e the
         complete object of the selected option. But, it is very rare that you will
-        need this. So, I have modified the components to return only the value
-        of the selected option instead of complete object. If you want to stick
-        to the default behaviou you can use the{" "}
-        <Link href="/default" className="text-orange-500">
-          default components
+        need this. So, I have also created a version of the components to return
+        only the value of the selected option instead of complete object. You
+        can check it out
+        <Link href="/" className="text-orange-500">
+          {" "}
+          here
         </Link>
       </p>
 
@@ -71,25 +103,12 @@ export default function Home() {
                 required: "Please select a storage option",
               }}
               render={({ field: { onChange, value, onBlur } }) => (
-                <RadioGroupWrapper
+                <RadioGroupDefaultWrapper
                   label="Radio Group"
                   value={value}
                   onChange={onChange}
                   onBlur={onBlur}
-                  options={[
-                    {
-                      id: 1,
-                      value: "startup",
-                      label: "Startup",
-                      desc: "12GB",
-                    },
-                    {
-                      id: 2,
-                      value: "business",
-                      label: "Business",
-                      desc: "16GB",
-                    },
-                  ]}
+                  options={radioGroupOptions}
                   error={errors.storage}
                 />
               )}
@@ -102,15 +121,12 @@ export default function Home() {
                 required: "Please select a user",
               }}
               render={({ field: { onChange, value, onBlur } }) => (
-                <ComboBoxWrapper
+                <ComboBoxDefaultWrapper
                   label="Combo Box"
                   value={value}
                   onChange={onChange}
                   onBlur={onBlur}
-                  options={[
-                    { id: 1, label: "Wade Cooper", value: "wade" },
-                    { id: 2, label: "Arlene Mccoy", value: "arlene" },
-                  ]}
+                  options={comboBoxOptions}
                   error={errors.user}
                 />
               )}
@@ -124,15 +140,15 @@ export default function Home() {
             </button>
             {storage && user ? (
               <Link
-                href="/"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 ml-3 border border-gray-300"
+                href="/default"
+                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-3"
               >
                 Without Prefill
               </Link>
             ) : (
               <Link
-                href="?storage=business&user=arlene"
-                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 ml-3 border border-gray-300"
+                href="/default?storage=business&user=arlene"
+                className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 ml-3"
               >
                 Prefill
               </Link>

@@ -3,7 +3,7 @@ import { FieldError } from "react-hook-form";
 
 export default function RadioGroupWrapper({
   label,
-  value,
+  value = '',
   onChange,
   options,
   onBlur,
